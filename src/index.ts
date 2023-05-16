@@ -20,12 +20,12 @@ app.use(
     onProxyReq: (proxyReq, req, res) => {
       proxyReq.setHeader("apikey", apikey);
       const queries: {
-        [quries: string]: string;
+        [quries: string]: string | number;
       } = {
         select: "*",
-        offset: "0",
+        offset: 0,
         order: "id.asc",
-        limit: req.query.limit?.toString() || "100",
+        limit: Number(req.query.limit) || 100,
       };
       const queryString = Object.keys(queries)
         .map(
